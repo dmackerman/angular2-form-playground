@@ -1,0 +1,8 @@
+$enable-flex: true;
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+.form-control {
+    &.ng-invalid:not('.ng-pristine') {
+        border-color: #d9534f;
+    }
+}

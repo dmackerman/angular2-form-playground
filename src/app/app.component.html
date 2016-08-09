@@ -1,3 +1,56 @@
-<h1>
-  {{title}}
-</h1>
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs">
+      <h5>Add User</h5>
+      <hr />
+      <form [formGroup]="userForm" novalidate (ngSubmit)="save(userForm.value, userForm.valid)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" formControlName="name" name="name">
+          <small [hidden]="userForm.controls.name.valid || (userForm.controls.name.pristine && !formSubmitted)" class="text-danger">
+            Name is required (minimum 5 characters).
+          </small>
+        </div>
+
+        <div formArrayName="addresses">
+          <div *ngFor="let address of userForm.controls.addresses.controls; let i = index" class="card">
+            <div class="card-block">
+              <h6 class="card-title">Address {{i + 1}}</h6>
+              <div [formGroupName]="i">
+                <address-form [addressFormGroup]="userForm.controls.addresses.controls[i]"></address-form>
+                <a class="btn btn-sm btn-outline-danger" href="#" role="button" *ngIf="userForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">Remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card text-xs-center">
+          <div class="card-block">
+            <a class="btn btn-outline-primary" href="#" role="button" (click)="addAddress()">Add Address</a>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-outline-secondary" (click)="resetForm()">Reset</button>
+      </form>
+    </div>
+    <div class="col-xs">
+      <div class="card card-block">
+        <h5>userForm details</h5>
+        <hr />
+        <ul>
+          <li>Is userForm valid? <strong>{{ userForm.valid | json }}</strong></li>
+          <li>userForm value:
+            <pre>{{ userForm.value | json }}</pre>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
