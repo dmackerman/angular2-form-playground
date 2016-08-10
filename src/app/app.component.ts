@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar';
 import { AddressFormComponent } from './components/address-form';
 
@@ -8,7 +8,6 @@ import { AddressFormComponent } from './components/address-form';
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss'],
     directives: [
-        REACTIVE_FORM_DIRECTIVES,
         NavBarComponent,
         AddressFormComponent
     ],
@@ -35,10 +34,6 @@ export class AppComponent implements OnInit {
             console.log(value);
         });
     }
-
-    // resetForm() {
-    //     this.userForm.
-    // }
 
     initAddress() {
         return this.formBuilder.group({
